@@ -1,19 +1,20 @@
 package linkedlist;
 
 /**
- * 约瑟夫环
+ * 问 題 41  约 瑟 夫 环 ： N 个 人 想 选 出 一 个 领 头 人 ， 他 们 排 成 一 个 环 ， 沿 着 环 每 数 到 第
+ * M 个 人 就 从 环 中 排 除 该 人 ， 并 从 下 一 个 人 开 始 重 新 数 。 请 找 出 最 后 留 在 环 中 的 人 。
  *
  * @author tufei
  * @date 2018/1/2.
  */
-class E41_JosephusRing {
+public class E41_JosephusRing {
 
     public static void getLeader(int M, int N) {
-        LinkedList head = new LinkedList();
+        LinkedList<Integer> head = new LinkedList<>();
         head.setData(1);
-        LinkedList last = head;
+        LinkedList<Integer> last = head;
         for (int i = 2; i <= N; i++) {
-            last.setNext(new LinkedList());
+            last.setNext(new LinkedList<Integer>());
             if (i == N) {
                 last.getNext().setNext(head);
             }
@@ -21,7 +22,7 @@ class E41_JosephusRing {
             last = last.getNext();
         }
 //        LinkedList temp = head;
-        LinkedList temp = last;
+        LinkedList<Integer> temp = last;
         for (int i = N; i > 1; i--) {
             //如果M为1，直接拿链表最末尾的结点
 //            if (M == 1) {
@@ -44,8 +45,8 @@ class E41_JosephusRing {
         getLeader(1, 5);
         getLeader(2, 4);
         getLeader(2, 5);
-        getLeader(2,1);
-        getLeader(5,4);
+        getLeader(2, 1);
+        getLeader(5, 4);
     }
 }/*Output:
 领导是第4个人
