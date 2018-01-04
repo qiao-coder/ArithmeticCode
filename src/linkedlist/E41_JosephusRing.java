@@ -10,19 +10,19 @@ package linkedlist;
 public class E41_JosephusRing {
 
     public static void getLeader(int M, int N) {
-        LinkedList<Integer> head = new LinkedList<>();
+        ListNode<Integer> head = new ListNode<>();
         head.setData(1);
-        LinkedList<Integer> last = head;
+        ListNode<Integer> last = head;
         for (int i = 2; i <= N; i++) {
-            last.setNext(new LinkedList<Integer>());
+            last.setNext(new ListNode<Integer>());
             if (i == N) {
                 last.getNext().setNext(head);
             }
             last.getNext().setData(i);
             last = last.getNext();
         }
-//        LinkedList temp = head;
-        LinkedList<Integer> temp = last;
+//        ListNode temp = head;
+        ListNode<Integer> temp = last;
         for (int i = N; i > 1; i--) {
             //如果M为1，直接拿链表最末尾的结点
 //            if (M == 1) {

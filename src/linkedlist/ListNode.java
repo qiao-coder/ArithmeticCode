@@ -4,15 +4,15 @@ package linkedlist;
  * @author tufei
  * @date 2018/1/2.
  */
-public class LinkedList<T> {
-    private LinkedList<T> next;
+public class ListNode<T> {
+    private ListNode<T> next;
     private T data;
 
-    public LinkedList<T> getNext() {
+    public ListNode<T> getNext() {
         return next;
     }
 
-    public void setNext(LinkedList<T> next) {
+    public void setNext(ListNode<T> next) {
         this.next = next;
     }
 

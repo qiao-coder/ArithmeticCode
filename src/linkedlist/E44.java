@@ -13,12 +13,12 @@ import java.util.Arrays;
 
 class E44 {
 
-    public static LinkedList getLastModLinked(LinkedList head,int k){
+    public static ListNode getLastModLinked(ListNode head, int k){
         if(k<=0){
             return null;
         }
         int i = 1;
-        LinkedList lastMod = null;
+        ListNode lastMod = null;
         while (head != null){
             if(i%k==0){
                 lastMod = head;
@@ -30,11 +30,11 @@ class E44 {
     }
 
     public static void main(String[] args){
-        LinkedList<Integer> head = LinkedListGenerators.fill(Arrays.asList(1,2,3,4,5,6,7,8,9,10));
-        LinkedList lastMod = getLastModLinked(head, 3);
+        ListNode<Integer> head = LinkedListGenerators.fill(Arrays.asList(1,2,3,4,5,6,7,8,9,10));
+        ListNode lastMod = getLastModLinked(head, 3);
         System.out.println("最后满足条件的节点："+lastMod.getData());
-        LinkedList<Integer> head2 = LinkedListGenerators.fill(Arrays.asList(1,2,3,4,5,6,7,8,9,10,11,12));
-        LinkedList lastMod2 = getLastModLinked(head2, 7);
+        ListNode<Integer> head2 = LinkedListGenerators.fill(Arrays.asList(1,2,3,4,5,6,7,8,9,10,11,12));
+        ListNode lastMod2 = getLastModLinked(head2, 7);
         System.out.println("最后满足条件的节点："+lastMod2.getData());
     }
 }/*Output

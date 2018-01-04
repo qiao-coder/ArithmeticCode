@@ -18,14 +18,14 @@ public class LinkedListGenerators {
      * @param length
      * @return
      */
-    public static LinkedList fill(int length) {
+    public static ListNode fill(int length) {
         if (length <= 0) {
             return null;
         }
-        LinkedList head = new LinkedList();
-        LinkedList last = head;
+        ListNode head = new ListNode();
+        ListNode last = head;
         for (int i = 0; i < length - 1; i++) {
-            last.setNext(new LinkedList());
+            last.setNext(new ListNode());
             last = last.getNext();
         }
         return head;
@@ -37,15 +37,15 @@ public class LinkedListGenerators {
      * @param <T>
      * @return
      */
-    public static <T> LinkedList<T> fill(List<T> list) {
+    public static <T> ListNode<T> fill(List<T> list) {
         if (list == null || list.size() <= 0) {
             return null;
         }
-        LinkedList<T> head = new LinkedList<>();
+        ListNode<T> head = new ListNode<>();
         head.setData(list.get(0));
-        LinkedList<T> last = head;
+        ListNode<T> last = head;
         for (int i = 1; i < list.size(); i++) {
-            last.setNext(new LinkedList<>());
+            last.setNext(new ListNode<>());
             last.getNext().setData(list.get(i));
             last = last.getNext();
         }
@@ -53,13 +53,13 @@ public class LinkedListGenerators {
     }
 
     public static void main(String[] args) {
-        LinkedList linkedList1 = LinkedListGenerators.fill(0);
-        System.out.println("生成的链表linkedList1的长度为：" + CountingLinkedList.getLength(linkedList1));
-        LinkedList linkedList2 = LinkedListGenerators.fill(10);
-        System.out.println("生成的链表linkedList2的长度为：" + CountingLinkedList.getLength(linkedList2));
-        LinkedList<Object> linkedList3 = LinkedListGenerators.fill(Collections.emptyList());
-        System.out.println("生成的链表linkedList3的长度为：" + CountingLinkedList.getLength(linkedList3));
-        LinkedList<Integer> linkedList4 = LinkedListGenerators.fill(Arrays.asList(1, 2, 3, 4, 5));
-        System.out.println("生成的链表linkedList4的长度为：" + CountingLinkedList.getLength(linkedList4));
+        ListNode listNode1 = LinkedListGenerators.fill(0);
+        System.out.println("生成的链表linkedList1的长度为：" + CountingLinkedList.getLength(listNode1));
+        ListNode listNode2 = LinkedListGenerators.fill(10);
+        System.out.println("生成的链表linkedList2的长度为：" + CountingLinkedList.getLength(listNode2));
+        ListNode<Object> listNode3 = LinkedListGenerators.fill(Collections.emptyList());
+        System.out.println("生成的链表linkedList3的长度为：" + CountingLinkedList.getLength(listNode3));
+        ListNode<Integer> listNode4 = LinkedListGenerators.fill(Arrays.asList(1, 2, 3, 4, 5));
+        System.out.println("生成的链表linkedList4的长度为：" + CountingLinkedList.getLength(listNode4));
     }
 }

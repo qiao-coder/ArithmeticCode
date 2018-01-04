@@ -1,7 +1,7 @@
 package util;
 
 
-import linkedlist.LinkedList;
+import linkedlist.ListNode;
 
 /**
  * @author tufei
@@ -13,17 +13,17 @@ public class CountingLinkedList {
     /**
      * 计算非循环链表的长度
      *
-     * @param linkedList
+     * @param listNode
      * @return
      */
-    public static int getLength(LinkedList linkedList) {
+    public static int getLength(ListNode listNode) {
         int i = 0;
-        if (linkedList == null) {
+        if (listNode == null) {
             return i;
         }
         i++;
-        while (linkedList.getNext() != null) {
-            linkedList = linkedList.getNext();
+        while (listNode.getNext() != null) {
+            listNode = listNode.getNext();
             i++;
         }
         return i;
