@@ -12,6 +12,13 @@ import linkedlist.ListNode;
 public class Stack<T> {
     private ListNode<T> top;
 
+    public Stack() {
+
+    }
+
+    public Stack(ListNode<T> listNode) {
+        top = listNode;
+    }
 
     public void push(T data) {
         if (top == null) {
