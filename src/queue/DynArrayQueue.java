@@ -25,10 +25,10 @@ public class DynArrayQueue<T> {
     }
 
     public static <T> DynArrayQueue<T> create(Class<T> kind, int size) {
-        if(kind == null){
+        if (kind == null) {
             throw new IllegalArgumentException("kind can't be null!");
         }
-        if(size == 0){
+        if (size == 0) {
             throw new IllegalArgumentException("size can't be zero!");
         }
         return new DynArrayQueue<>(kind, size);
@@ -96,7 +96,8 @@ public class DynArrayQueue<T> {
             newArray[cursor] = array[cursor];
         }
         if (front > end) {
-            for (int newCursor = 0; newCursor <= end; cursor++) {
+            for (int newCursor = 0; newCursor <= end; newCursor++) {
+                cursor++;
                 newArray[cursor] = array[newCursor];
             }
         }
@@ -107,7 +108,7 @@ public class DynArrayQueue<T> {
     }
 
     public static void main(String[] args) {
-        DynArrayQueue<String> stringArrayQueue = DynArrayQueue.create(String.class,1);
+        DynArrayQueue<String> stringArrayQueue = DynArrayQueue.create(String.class, 1);
         stringArrayQueue.enQueue("a");
         System.out.println("入队：a,队首元素现在是：" + stringArrayQueue.front() + "，队列长度是：" + stringArrayQueue.size());
         stringArrayQueue.enQueue("b");
@@ -116,5 +117,11 @@ public class DynArrayQueue<T> {
         System.out.println("入队：c,队首元素现在是：" + stringArrayQueue.front() + "，队列长度是：" + stringArrayQueue.size());
         System.out.println("出队：" + stringArrayQueue.deQueue() + ",队首元素现在是：" + stringArrayQueue.front() + "，队列长度是：" + stringArrayQueue.size());
         System.out.println("出队：" + stringArrayQueue.deQueue() + ",队首元素现在是：" + stringArrayQueue.front() + "，队列长度是：" + stringArrayQueue.size());
+        stringArrayQueue.enQueue("d");
+        stringArrayQueue.enQueue("e");
+        stringArrayQueue.enQueue("f");
+        stringArrayQueue.enQueue("g");
+        System.out.println("入队：d、e、f、g,队首元素现在是：" + stringArrayQueue.front() + "，队列长度是：" + stringArrayQueue.size());
+
     }
 }
