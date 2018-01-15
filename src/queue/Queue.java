@@ -1,5 +1,9 @@
 package queue;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import linkedlist.ListNode;
 
 /**
@@ -57,6 +61,21 @@ public class Queue<T> {
 
     public int size() {
         return size;
+    }
+
+    @Override
+    public String toString() {
+        if (isEmpty()) {
+            return null;
+        }
+        List<T> list = new ArrayList<>();
+        ListNode<T> listNode = head;
+        while (listNode != null) {
+            list.add(listNode.getData());
+            listNode = listNode.getNext();
+        }
+        Collections.reverse(list);
+        return list.toString();
     }
 
     public static void main(String[] args) {
