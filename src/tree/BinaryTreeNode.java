@@ -3,6 +3,8 @@ package tree;
 import java.util.ArrayList;
 import java.util.List;
 
+import queue.Queue;
+
 /**
  * @author tufei
  * @date 2018/1/22.
@@ -52,18 +54,28 @@ public class BinaryTreeNode<T> {
         return size;
     }
 
-    private void preOrder(BinaryTreeNode<T> treeNode, List<T> list) {
+    private void levelOrder(BinaryTreeNode<T> treeNode, List<T> list) {
         if (treeNode != null) {
-            list.add(treeNode.getData());
-            preOrder(treeNode.getLeft(), list);
-            preOrder(treeNode.getRight(), list);
+            Queue<BinaryTreeNode<T>> queue = new Queue<>();
+            queue.enQueue(treeNode);
+            BinaryTreeNode<T> temp;
+            while (!queue.isEmpty()) {
+                temp = queue.deQueue();
+                list.add(temp.getData());
+                if (temp.getLeft() != null) {
+                    queue.enQueue(temp.getLeft());
+                }
+                if (temp.getRight() != null) {
+                    queue.enQueue(temp.getRight());
+                }
+            }
         }
     }
 
     @Override
     public String toString() {
-        ArrayList<T> list = new ArrayList<>();
-        preOrder(this, list);
+        List<T> list = new ArrayList<>();
+        levelOrder(this, list);
         return list.toString();
     }
 }

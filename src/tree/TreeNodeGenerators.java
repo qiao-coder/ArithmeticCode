@@ -20,15 +20,14 @@ public class TreeNodeGenerators {
      * @param length
      * @return
      */
-    public static BinaryTreeNode fill(int length) {
+    public static  BinaryTreeNode<Integer> fill(int length) {
         if (length <= 0) {
             return null;
         }
         Queue<BinaryTreeNode<Integer>> queue = new Queue<>();
         BinaryTreeNode<Integer> head = new BinaryTreeNode<>();
-        BinaryTreeNode<Integer> last = head;
-        last.setData(1);
-        queue.enQueue(last);
+        head.setData(1);
+        queue.enQueue(head);
         for (int i = 2; i < length + 1; i++) {
             BinaryTreeNode<Integer> treeNode = new BinaryTreeNode<>();
             treeNode.setData(i);
@@ -57,9 +56,8 @@ public class TreeNodeGenerators {
         }
         Queue<BinaryTreeNode<T>> queue = new Queue<>();
         BinaryTreeNode<T> head = new BinaryTreeNode<>();
-        BinaryTreeNode<T> last = head;
-        last.setData(list.get(0));
-        queue.enQueue(last);
+        head.setData(list.get(0));
+        queue.enQueue(head);
         for (int i = 1; i < list.size(); i++) {
             BinaryTreeNode<T> treeNode = new BinaryTreeNode<>();
             treeNode.setData(list.get(i));
@@ -76,10 +74,10 @@ public class TreeNodeGenerators {
     }
 
     public static void main(String[] args) {
-        BinaryTreeNode treeNode1 = TreeNodeGenerators.fill(0);
+        BinaryTreeNode<Integer> treeNode1 = TreeNodeGenerators.fill(0);
         print("生成的二叉树treeNode1的长度为：" + (treeNode1 == null ? 0 : treeNode1.size()));
         print(treeNode1);
-        BinaryTreeNode treeNode2 = TreeNodeGenerators.fill(10);
+        BinaryTreeNode<Integer> treeNode2 = TreeNodeGenerators.fill(10);
         print("生成的二叉树treeNode2的长度为：" + (treeNode2 == null ? 0 : treeNode2.size()));
         print(treeNode2);
         BinaryTreeNode<Object> treeNode3 = TreeNodeGenerators.fill(Collections.emptyList());

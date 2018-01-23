@@ -12,7 +12,7 @@ import java.util.Arrays;
 public class E1_findMax {
     public static int findMax(BinaryTreeNode<Integer> treeNode) {
         if (treeNode == null) {
-            return 0;
+            return Integer.MIN_VALUE;
         }
         int data = treeNode.getData();
         int left = findMax(treeNode.getLeft());
