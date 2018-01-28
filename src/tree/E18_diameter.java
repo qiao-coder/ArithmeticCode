@@ -45,16 +45,16 @@ public class E18_diameter {
     static int diameter = 0;
     public static <T> int diameterOfBinaryTree(BinaryTreeNode<T> root){
         diameter = 0;
-        diameterOfBinaryTree(root,diameter);
+        getDiameter(root);
         return diameter;
     }
 
-    private static <T> int diameterOfBinaryTree(BinaryTreeNode<T> root, int temp) {
+    private static <T> int getDiameter(BinaryTreeNode<T> root) {
         if(root == null){
             return 0;
         }
-        int left = diameterOfBinaryTree(root.getLeft(),temp);
-        int right = diameterOfBinaryTree(root.getRight(),temp);
+        int left = getDiameter(root.getLeft());
+        int right = getDiameter(root.getRight());
         diameter = Math.max(diameter,left+right);
         return Math.max(left,right)+1;
     }
