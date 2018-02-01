@@ -70,15 +70,26 @@ public class BinarySearchTreeNode<T> {
         }
     }
 
+    public static BinarySearchTreeNode<Integer> findMax(BinarySearchTreeNode<Integer> root) {
+        if (root == null) {
+            return null;
+        }
+        if (root.getRight() == null) {
+            return root;
+        } else {
+            return findMax(root.getRight());
+        }
+    }
+
     public static void main(String[] args) {
         BinarySearchTreeNode<Integer> treeNode = new BinarySearchTreeNode<>();
         treeNode.setData(5);
         BinarySearchTreeNode<Integer> treeNode1 = new BinarySearchTreeNode<>();
-        treeNode1.setData(4);
+        treeNode1.setData(2);
         BinarySearchTreeNode<Integer> treeNode2 = new BinarySearchTreeNode<>();
         treeNode2.setData(6);
         BinarySearchTreeNode<Integer> treeNode3 = new BinarySearchTreeNode<>();
-        treeNode3.setData(2);
+        treeNode3.setData(1);
         BinarySearchTreeNode<Integer> treeNode4 = new BinarySearchTreeNode<>();
         treeNode4.setData(3);
         BinarySearchTreeNode<Integer> treeNode5 = new BinarySearchTreeNode<>();

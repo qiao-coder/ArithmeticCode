@@ -20,7 +20,7 @@ public class TreeNodeGenerators {
      * @param length
      * @return
      */
-    public static  BinaryTreeNode<Integer> fill(int length) {
+    public static BinaryTreeNode<Integer> fill(int length) {
         if (length <= 0) {
             return null;
         }
@@ -71,6 +71,60 @@ public class TreeNodeGenerators {
             queue.enQueue(treeNode);
         }
         return head;
+    }
+
+    /**
+     * 生成指定长度的二叉树
+     *
+     * @param length
+     * @return
+     */
+    public static BinarySearchTreeNode<Integer> fillSearchTree(int length) {
+        if (length <= 0) {
+            return null;
+        }
+        Queue<BinarySearchTreeNode<Integer>> queue = new Queue<>();
+        BinarySearchTreeNode<Integer> head = new BinarySearchTreeNode<>();
+        head.setData(1);
+        queue.enQueue(head);
+        for (int i = 2; i < length + 1; i++) {
+            BinarySearchTreeNode<Integer> treeNode = new BinarySearchTreeNode<>();
+            treeNode.setData(i);
+            BinarySearchTreeNode<Integer> front = queue.front();
+            if (front.getLeft() == null) {
+                front.setLeft(treeNode);
+            } else {
+                front.setRight(treeNode);
+                queue.deQueue();
+            }
+            queue.enQueue(treeNode);
+        }
+        return head;
+    }
+
+    /**
+     * 生成一个简单的BST树，用于测试
+     * @return
+     */
+    public static BinarySearchTreeNode<Integer> generator() {
+        BinarySearchTreeNode<Integer> treeNode = new BinarySearchTreeNode<>();
+        treeNode.setData(5);
+        BinarySearchTreeNode<Integer> treeNode1 = new BinarySearchTreeNode<>();
+        treeNode1.setData(2);
+        BinarySearchTreeNode<Integer> treeNode2 = new BinarySearchTreeNode<>();
+        treeNode2.setData(6);
+        BinarySearchTreeNode<Integer> treeNode3 = new BinarySearchTreeNode<>();
+        treeNode3.setData(1);
+        BinarySearchTreeNode<Integer> treeNode4 = new BinarySearchTreeNode<>();
+        treeNode4.setData(3);
+        BinarySearchTreeNode<Integer> treeNode5 = new BinarySearchTreeNode<>();
+        treeNode5.setData(7);
+        treeNode.setLeft(treeNode1);
+        treeNode.setRight(treeNode2);
+        treeNode1.setLeft(treeNode3);
+        treeNode1.setRight(treeNode4);
+        treeNode2.setRight(treeNode5);
+        return treeNode;
     }
 
     public static void main(String[] args) {
