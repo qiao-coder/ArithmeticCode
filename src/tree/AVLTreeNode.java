@@ -90,6 +90,35 @@ public class AVLTreeNode<T> {
         }
     }
 
+    /**
+     * 求AVL树的高度
+     * @param root
+     * @param <T>
+     * @return
+     */
+    public static <T> int height(AVLTreeNode<T> root){
+        if(root == null){
+            return -1;
+        }else {
+            return root.getHeight();
+        }
+    }
+
+    /**
+     * 左左旋转
+     * @param x
+     * @param <T>
+     * @return
+     */
+    public static <T> AVLTreeNode<T> singleRotateLeft(AVLTreeNode<T> x){
+        AVLTreeNode<T> w = x.getLeft();
+        x.setLeft(w.getRight());
+        w.setRight(x);
+        x.setHeight(Math.max(height(x.getLeft()),height(x.getRight()))+1);
+        w.setHeight(Math.max(height(w.getLeft()),x.getHeight())+1);
+        return w;
+    }
+
     public static void main(String[] args) {
         AVLTreeNode<Integer> treeNode = new AVLTreeNode<>();
         treeNode.setData(5);
