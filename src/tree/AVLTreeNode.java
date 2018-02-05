@@ -92,31 +92,87 @@ public class AVLTreeNode<T> {
 
     /**
      * 求AVL树的高度
+     *
      * @param root
      * @param <T>
      * @return
      */
-    public static <T> int height(AVLTreeNode<T> root){
-        if(root == null){
+    public static <T> int height(AVLTreeNode<T> root) {
+        if (root == null) {
             return -1;
-        }else {
+        } else {
             return root.getHeight();
         }
     }
 
     /**
      * 左左旋转
-     * @param x
-     * @param <T>
-     * @return
      */
-    public static <T> AVLTreeNode<T> singleRotateLeft(AVLTreeNode<T> x){
+    public static <T> AVLTreeNode<T> singleRotateLeft(AVLTreeNode<T> x) {
         AVLTreeNode<T> w = x.getLeft();
         x.setLeft(w.getRight());
         w.setRight(x);
-        x.setHeight(Math.max(height(x.getLeft()),height(x.getRight()))+1);
-        w.setHeight(Math.max(height(w.getLeft()),x.getHeight())+1);
+        x.setHeight(Math.max(height(x.getLeft()), height(x.getRight())) + 1);
+        w.setHeight(Math.max(height(w.getLeft()), x.getHeight()) + 1);
         return w;
+    }
+
+    /**
+     * 右右旋转
+     */
+    public static <T> AVLTreeNode<T> singleRotateRight(AVLTreeNode<T> w) {
+        AVLTreeNode<T> x = w.getRight();
+        w.setRight(x.getLeft());
+        x.setLeft(w);
+        w.setHeight(Math.max(height(w.getRight()), height(w.getLeft())) + 1);
+        x.setHeight(Math.max(height(x.getRight()), w.getHeight()) + 1);
+        return x;
+    }
+
+    /**
+     * 左右旋转
+     */
+    public static <T> AVLTreeNode<T> doubleRotateWithLeft(AVLTreeNode<T> z) {
+        z.setLeft(singleRotateRight(z.getLeft()));
+        return singleRotateLeft(z);
+    }
+
+    /**
+     * 右左旋转
+     */
+    public static <T> AVLTreeNode<T> doubleRotateWithRight(AVLTreeNode<T> z) {
+        z.setRight(singleRotateLeft(z.getRight()));
+        return singleRotateRight(z);
+    }
+
+    public static AVLTreeNode<Integer> insert(AVLTreeNode<Integer> root, AVLTreeNode<Integer> parent, int data) {
+        if (root == null) {
+            root = new AVLTreeNode<>();
+            root.setData(data);
+            root.setHeight(0);
+            root.setLeft(null);
+            root.setRight(null);
+        } else if (data < root.getData()) {
+            root.setLeft(insert(root.getLeft(), root, data));
+            if (height(root.getLeft()) - height(root.getRight()) == 2) {
+                if (data < root.getLeft().getData()) {
+                    root = singleRotateLeft(root);
+                } else {
+                    root = doubleRotateWithLeft(root);
+                }
+            }
+        } else if (data > root.getData()) {
+            root.setRight(insert(root.getRight(), root, data));
+            if (height(root.getRight()) - height(root.getLeft()) == 2) {
+                if (data < root.getRight().getData()) {
+                    root = singleRotateRight(root);
+                } else {
+                    root = doubleRotateWithRight(root);
+                }
+            }
+        }
+        root.setHeight(Math.max(height(root.getLeft()), height(root.getRight())) + 1);
+        return root;
     }
 
     public static void main(String[] args) {
