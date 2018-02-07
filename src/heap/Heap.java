@@ -1,7 +1,7 @@
 package heap;
 
 /**
- * 最大堆
+ * 堆
  *
  * @author tufei
  * @date 2018/2/6.
@@ -11,11 +11,15 @@ public class Heap {
     private int[] array;
     private int count;
     private int capacity;
-    private int heap_type;
+    private Type type;
 
-    public Heap(int capacity, int heap_type) {
+    enum Type {
+        MAX, MIN
+    }
+
+    public Heap(int capacity, Type type) {
         this.capacity = capacity;
-        this.heap_type = heap_type;
+        this.type = type;
         this.count = 0;
         this.array = new int[capacity];
     }
@@ -56,24 +60,43 @@ public class Heap {
      * @param i
      */
     public void percolateDown(int i) {
-        int l, r, max, temp;
+        int l, r, down, temp;
         l = leftChild(i);
         r = rightChild(i);
-        if (l != -1 && this.array[l] > this.array[i]) {
-            max = 1;
+        if (l == -1 && r == -1) {
+            return;
+        }
+        if (type == Type.MAX) {
+            if (l != -1 && this.array[l] > this.array[i]) {
+                down = l;
+            } else {
+                down = i;
+            }
         } else {
-            max = i;
+            if (l != -1 && this.array[l] < this.array[i]) {
+                down = l;
+            } else {
+                down = i;
+            }
         }
-        if (r != -1 && this.array[r] > this.array[max]) {
-            max = r;
+        if(type == Type.MAX){
+            if (r != -1 && this.array[r] > this.array[down]) {
+                down = r;
+            }
+        }else {
+            if (r != -1 && this.array[r] < this.array[down]) {
+                down = r;
+            }
         }
-        if (max != i) {
+
+        if (down != i) {
             //交换
             temp = this.array[i];
-            this.array[i] = this.array[max];
-            this.array[max] = temp;
+            this.array[i] = this.array[down];
+            this.array[down] = temp;
+            percolateDown(down);
         }
-        percolateDown(max);
+
     }
 
     public int deleteMax() {
@@ -121,26 +144,26 @@ public class Heap {
      *
      * @param h
      * @param a
-     * @param n
+     * @param arrayLength
      */
-    public static void buildHeap(Heap h, int[] a, int n) {
+    public static void buildHeap(Heap h, int[] a, int arrayLength) {
         if (h == null) {
             return;
         }
-        while (n > h.capacity) {
+        while (arrayLength > h.capacity) {
             h.resizeHeap();
         }
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < arrayLength; i++) {
             h.array[i] = a[i];
         }
-        h.count = n;
-        for (int i = (n - 1) / 2; i >= 0; i--) {
+        h.count = arrayLength;
+        for (int i = (arrayLength - 1) / 2; i >= 0; i--) {
             h.percolateDown(i);
         }
     }
 
     public static void heapSort(int[] a, int n) {
-        Heap h = new Heap(n, 0);
+        Heap h = new Heap(n, Type.MIN);
         buildHeap(h, a, n);
         for (int i = n - 1; i > 0; i--) {
             h.array[0] = h.array[h.count - 1];
@@ -173,11 +196,11 @@ public class Heap {
         this.capacity = capacity;
     }
 
-    public int getHeap_type() {
-        return heap_type;
+    public Type getType() {
+        return type;
     }
 
-    public void setHeap_type(int heap_type) {
-        this.heap_type = heap_type;
+    public void setType(Type type) {
+        this.type = type;
     }
 }
