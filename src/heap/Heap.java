@@ -79,11 +79,11 @@ public class Heap {
                 down = i;
             }
         }
-        if(type == Type.MAX){
+        if (type == Type.MAX) {
             if (r != -1 && this.array[r] > this.array[down]) {
                 down = r;
             }
-        }else {
+        } else {
             if (r != -1 && this.array[r] < this.array[down]) {
                 down = r;
             }
@@ -100,11 +100,27 @@ public class Heap {
     }
 
     public int deleteMax() {
+        if (type == Type.MAX) {
+            return delete(0);
+        } else {
+            return delete(this.count - 1);
+        }
+    }
+
+    public int deleteMin() {
+        if(type == Type.MAX){
+            return delete(this.count - 1);
+        }else {
+            return delete(0);
+        }
+    }
+
+    private int delete(int i) {
         if (this.count == 0) {
             return -1;
         }
-        int data = this.array[0];
-        this.array[0] = this.array[this.count - 1];
+        int data = this.array[i];
+        this.array[i] = this.array[this.count - 1 - i];
         this.count--;
         percolateDown(0);
         return data;
