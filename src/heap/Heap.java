@@ -31,6 +31,11 @@ public class Heap {
         return (i - 1) / 2;
     }
 
+    /**
+     * 获取左孩子节点的下标
+     * @param i
+     * @return
+     */
     public int leftChild(int i) {
         int left = 2 * i + 1;
         if (left >= this.count) {
@@ -39,6 +44,11 @@ public class Heap {
         return left;
     }
 
+    /**
+     * 获取右孩子节点的下标
+     * @param i
+     * @return
+     */
     public int rightChild(int i) {
         int right = 2 * i + 2;
         if (right >= this.count) {
@@ -120,9 +130,11 @@ public class Heap {
             return -1;
         }
         int data = this.array[i];
-        this.array[i] = this.array[this.count - 1 - i];
+        if(this.count > 1){
+            this.array[i] = this.array[this.count - 1 - i];
+            percolateDown(0);
+        }
         this.count--;
-        percolateDown(0);
         return data;
     }
 
@@ -133,10 +145,18 @@ public class Heap {
         }
         this.count++;
         i = this.count - 1;
-        while ((i >= 0 && data > this.array[(i - 1) / 2])) {
-            this.array[i] = this.array[(i - 1) / 2];
-            i = (i - 1) / 2;
+        if(type == Type.MAX){
+            while ((i >= 0 && data > this.array[(i - 1) / 2])) {
+                this.array[i] = this.array[(i - 1) / 2];
+                i = (i - 1) / 2;
+            }
+        }else {
+            while ((i >= 0 && data < this.array[(i - 1) / 2])) {
+                this.array[i] = this.array[(i - 1) / 2];
+                i = (i - 1) / 2;
+            }
         }
+
         this.array[i] = data;
     }
 
